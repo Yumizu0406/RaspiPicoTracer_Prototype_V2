@@ -9,6 +9,50 @@ set(toolchainVersion 13_2_Rel1)
 set(picotoolVersion 2.0.0)
 include(${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
 # ====================================================================================
+# == DO NEVER EDIT THE NEXT LINES for Raspberry Pi Pico VS Code Extension to work ==
+if(WIN32)
+    set(USERHOME $ENV{USERPROFILE})
+else()
+    set(USERHOME $ENV{HOME})
+endif()
+set(sdkVersion 2.0.0)
+set(toolchainVersion 13_2_Rel1)
+set(picotoolVersion 2.0.0)
+include(${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
+# ====================================================================================
+# == DO NEVER EDIT THE NEXT LINES for Raspberry Pi Pico VS Code Extension to work ==
+if(WIN32)
+    set(USERHOME $ENV{USERPROFILE})
+else()
+    set(USERHOME $ENV{HOME})
+endif()
+set(sdkVersion 2.0.0)
+set(toolchainVersion 13_2_Rel1)
+set(picotoolVersion 2.0.0)
+include(${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
+# ====================================================================================
+# == DO NEVER EDIT THE NEXT LINES for Raspberry Pi Pico VS Code Extension to work ==
+if(WIN32)
+    set(USERHOME $ENV{USERPROFILE})
+else()
+    set(USERHOME $ENV{HOME})
+endif()
+set(sdkVersion 2.0.0)
+set(toolchainVersion 13_2_Rel1)
+set(picotoolVersion 2.0.0)
+include(${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
+# ====================================================================================
+# == DO NEVER EDIT THE NEXT LINES for Raspberry Pi Pico VS Code Extension to work ==
+if(WIN32)
+    set(USERHOME $ENV{USERPROFILE})
+else()
+    set(USERHOME $ENV{HOME})
+endif()
+set(sdkVersion 2.0.0)
+set(toolchainVersion 13_2_Rel1)
+set(picotoolVersion 2.0.0)
+include(${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
+# ====================================================================================
 # Generated Cmake Pico project file
 
 cmake_minimum_required(VERSION 3.13)
@@ -42,7 +86,7 @@ project(RaspiPicoTracer C CXX ASM)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-
+add_subdirectory(driver)
 add_executable(RaspiPicoTracer RaspiPicoTracer.c )
 
 pico_set_program_name(RaspiPicoTracer "RaspiPicoTracer")
@@ -53,13 +97,14 @@ pico_enable_stdio_uart(RaspiPicoTracer 0)
 pico_enable_stdio_usb(RaspiPicoTracer 0)
 
 # Add the standard library to the build
-target_link_libraries(RaspiPicoTracer
-        pico_stdlib)
+target_link_libraries(RaspiPicoTracer pico_stdlib)
+target_link_libraries(RaspiPicoTracer driver)
 
 # Add the standard include files to the build
 target_include_directories(RaspiPicoTracer PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}
   ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts or any other standard includes, if required
+  ${CMAKE_CURRENT_LIST_DIR}/driver
 )
 
 pico_add_extra_outputs(RaspiPicoTracer)
