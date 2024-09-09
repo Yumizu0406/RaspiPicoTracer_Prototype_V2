@@ -7,5 +7,5 @@ set(CMAKE_CXX_STANDARD 17)
 
 pico_sdk_init()
 
-add_library(driver STATIC cycle.c)
+add_library(driver STATIC cycle.c sw.c)
 target_link_libraries(driver pico_stdlib)

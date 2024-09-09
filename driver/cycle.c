@@ -8,7 +8,7 @@
 include
 ***********************************************************************************************************************/
 #include "cycle.h"
-//#include "sw.h"
+#include "sw.h"
 //#include "../application/control.h"
 //#include "lineSensor.h"
 #include "pico/stdlib.h"
@@ -52,7 +52,7 @@ bool cycle_callback_1ms(__unused struct repeating_timer *t){
         gpio_put(LED_PIN, 1);
     }
 
-    //update_sw();
+    update_sw();
     //update_lineSensor();
     //update_control();
     return true;
