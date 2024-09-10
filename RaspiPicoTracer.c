@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "pico/stdlib.h"
 #include "driver/cycle.h"
 #include "driver/sw.h"
@@ -22,17 +23,7 @@ void menu_no_5(void);
 void menu_no_6(void);
 void menu_no_7(void);
 void disp_led(uint8_t value);
-
-void (* const menu_table[8])(void) = {
-    menu_no_0,
-    menu_no_1,
-    menu_no_2,
-    menu_no_3,
-    menu_no_4,
-    menu_no_5,
-    menu_no_6,
-    menu_no_7
-};
+void exe_select_func(uint8_t select_func);
 
 static uint8_t now_led_disp_value;
 static uint8_t menu_no;
@@ -44,6 +35,7 @@ int main()
     menu_no = 0;
     menu_status = selecting_menu;
 
+    stdio_init_all();
     init_driver();
 
     while (true) {
@@ -64,7 +56,7 @@ int main()
             if(isSwStatus(SW_BACK, click)){
                 menu_status = selecting_menu;
             }
-            menu_table[menu_no];
+            exe_select_func(menu_no);
         }
     }
 }
@@ -89,8 +81,8 @@ void menu_no_0(void){
 }
 
 void menu_no_1(void){
-    if(isSwStatus(SW_EXE, click)){
-    }
+    printf("sensor = %d\n", get_line_center_deff());
+    sleep_ms(500);
 }
 
 void menu_no_2(void){
@@ -171,5 +163,25 @@ void disp_led(uint8_t value){
         gpio_put(DISP_LED_0_BIT_PIN, 0);
         gpio_put(DISP_LED_1_BIT_PIN, 0);
         gpio_put(DISP_LED_2_BIT_PIN, 0);
+    }
+}
+
+void exe_select_func(uint8_t select_func){
+    if(select_func == 0){
+        menu_no_0();
+    } else if(select_func == 1){
+        menu_no_1();
+    } else if(select_func == 2){
+        menu_no_2();
+    } else if(select_func == 3){
+        menu_no_3();
+    } else if(select_func == 4){
+        menu_no_4();
+    } else if(select_func == 5){
+        menu_no_5();
+    } else if(select_func == 6){
+        menu_no_6();
+    } else if(select_func == 7){
+        menu_no_7();
     }
 }
