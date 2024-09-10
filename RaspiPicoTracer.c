@@ -1,6 +1,7 @@
 #include "pico/stdlib.h"
 #include "driver/cycle.h"
 #include "driver/sw.h"
+#include "driver/lineSensor.h"
 
 const uint DISP_LED_0_BIT_PIN = 10;
 const uint DISP_LED_1_BIT_PIN = 11;
@@ -60,7 +61,7 @@ void init_driver(void){
     gpio_set_dir(DISP_LED_2_BIT_PIN, GPIO_OUT);
 
     init_sw();
-    //init_lineSensor();
+    init_lineSensor();
     init_cycle();
 }
 
@@ -72,7 +73,6 @@ void menu_no_0(void){
 
 void menu_no_1(void){
     if(isSwStatus(SW_EXE, click)){
-
     }
 }
 

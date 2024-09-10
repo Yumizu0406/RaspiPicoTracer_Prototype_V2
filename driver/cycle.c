@@ -10,7 +10,7 @@ include
 #include "cycle.h"
 #include "sw.h"
 //#include "../application/control.h"
-//#include "lineSensor.h"
+#include "lineSensor.h"
 #include "pico/stdlib.h"
 
 /***********************************************************************************************************************
@@ -53,7 +53,7 @@ bool cycle_callback_1ms(__unused struct repeating_timer *t){
     }
 
     update_sw();
-    //update_lineSensor();
+    update_lineSensor();
     //update_control();
     return true;
 }
