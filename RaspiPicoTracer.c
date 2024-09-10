@@ -7,6 +7,11 @@ const uint DISP_LED_0_BIT_PIN = 10;
 const uint DISP_LED_1_BIT_PIN = 11;
 const uint DISP_LED_2_BIT_PIN = 13;
 
+typedef enum{
+    selecting_menu = 0,
+	exe_menu
+}menu_status_t;
+
 void init_driver(void);
 void menu_no_0(void);
 void menu_no_1(void);
@@ -31,24 +36,36 @@ void (* const menu_table[8])(void) = {
 
 static uint8_t now_led_disp_value;
 static uint8_t menu_no;
+static menu_status_t menu_status;
 
 int main()
 {
     now_led_disp_value = 8;
     menu_no = 0;
+    menu_status = selecting_menu;
 
     init_driver();
 
     while (true) {
-        if(isSwStatus(SW_NEXT, click)){
-            menu_no++;
-            if(menu_no >= 8){
-                menu_no = 0;
+        if(menu_status == selecting_menu){
+            if(isSwStatus(SW_NEXT, click)){
+                menu_no++;
+                if(menu_no >= 8){
+                    menu_no = 0;
+                }
             }
-        }
-        disp_led(menu_no);
+            disp_led(menu_no);
 
-        menu_table[menu_no];
+            if(isSwStatus(SW_EXE, click)){
+                menu_status = exe_menu;
+            }
+
+        } else {
+            if(isSwStatus(SW_BACK, click)){
+                menu_status = selecting_menu;
+            }
+            menu_table[menu_no];
+        }
     }
 }
 
