@@ -3,6 +3,7 @@
 #include "driver/cycle.h"
 #include "driver/sw.h"
 #include "driver/lineSensor.h"
+#include "application/control.h"
 
 const uint DISP_LED_0_BIT_PIN = 10;
 const uint DISP_LED_1_BIT_PIN = 11;
@@ -36,6 +37,7 @@ int main()
     menu_status = selecting_menu;
 
     stdio_init_all();
+    init_control();
     init_driver();
 
     while (true) {

@@ -87,6 +87,7 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 add_subdirectory(driver)
+add_subdirectory(application)
 add_executable(RaspiPicoTracer RaspiPicoTracer.c )
 
 pico_set_program_name(RaspiPicoTracer "RaspiPicoTracer")
@@ -99,12 +100,14 @@ pico_enable_stdio_usb(RaspiPicoTracer 1)
 # Add the standard library to the build
 target_link_libraries(RaspiPicoTracer pico_stdlib)
 target_link_libraries(RaspiPicoTracer driver)
+target_link_libraries(RaspiPicoTracer application)
 
 # Add the standard include files to the build
 target_include_directories(RaspiPicoTracer PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}
   ${CMAKE_CURRENT_LIST_DIR}/.. # for our common lwipopts or any other standard includes, if required
   ${CMAKE_CURRENT_LIST_DIR}/driver
+  ${CMAKE_CURRENT_LIST_DIR}/application
 )
 
 pico_add_extra_outputs(RaspiPicoTracer)
