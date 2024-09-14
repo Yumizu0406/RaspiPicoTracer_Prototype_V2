@@ -3,6 +3,7 @@
 #include "driver/cycle.h"
 #include "driver/sw.h"
 #include "driver/lineSensor.h"
+#include "driver/TB6612FNG.h"
 #include "application/control.h"
 
 const uint DISP_LED_0_BIT_PIN = 10;
@@ -71,6 +72,7 @@ void init_driver(void){
     gpio_init(DISP_LED_2_BIT_PIN);
     gpio_set_dir(DISP_LED_2_BIT_PIN, GPIO_OUT);
 
+    init_TB6612FNG();
     init_sw();
     init_lineSensor();
     init_cycle();
